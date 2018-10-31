@@ -12,8 +12,8 @@ const Subject = (props) => {
             { props.subject ? (
                 <Card >
                     <CardMedia 
-                        className="media"
-                        image={props.subject.subjectImage}
+                        style={{height: 200}}
+                        image="https://www.aprenderexcel.com.br//imagens/post/385/2901-1.jpg"
                         title={props.subject.title}
                     />
                     <CardContent>
