@@ -4,3 +4,6 @@
 .pos {
     margin-bottom: 12;
 }
+.cardContent {
+    min-height: 150px;
+}
