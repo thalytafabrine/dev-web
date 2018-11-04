@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import SubjectsList from './components/Subject/SubjectsList';
 import StudyList from './components/StudyList/StudyList';
+import NewStudyList from './components/StudyList/NewStudyList';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <NavBar />
         <SubjectsList/>
         <StudyList />
+        <NewStudyList />
       </div>
     );
   }
