@@ -42,6 +42,7 @@ const subjects = [
 class NewStudyList extends React.Component {
     state = {
         name: 'Cat in the Hat',
+        url: '/listaEstudo/cat',
         currency: 'None',
         open: false
     };
@@ -57,6 +58,11 @@ class NewStudyList extends React.Component {
     };
   
     handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    criarLista = () => {
+        // aqui deve chamar função da api para POST em lista de estudo
         this.setState({ open: false });
     };
 
@@ -107,7 +113,7 @@ class NewStudyList extends React.Component {
                     <Button onClick={this.handleClose} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={this.criarLista} color="primary" href={this.state.url}>
                         Criar
                     </Button>
                 </DialogActions>
