@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FlashCard from '../FlashCard/FlashCard';
 import Grid from '@material-ui/core/Grid';
+import NewFlashCard from '../FlashCard/NewFlashCard';
 
 class StudyList extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class StudyList extends Component {
                         </Grid>
                     ))}
                 </Grid>
+                <NewFlashCard />
             </div>
         );
     }
