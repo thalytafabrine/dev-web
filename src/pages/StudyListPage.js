@@ -38,7 +38,8 @@ class StudyListPage extends Component {
     refresh = async() => {
         let response = await Api.get('card');
         console.log(response);
-        this.setState({ posts: response.data });
+        this.setState({ cards: response.data });
+        console.log(this.state, 'posts apos request')
     }
 
     render() {

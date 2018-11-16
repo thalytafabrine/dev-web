@@ -6,19 +6,49 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Api } from '../../services/Api';
 
 class NewFlashCard extends Component {
-  state = {
-    open: false,
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            card: {
+                term: '',
+                definition: ''
+            }
+        }
+    }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+    reset = () => {
+        this.setState({
+            open: false,
+            card: {
+                term: '',
+                definition: ''
+            }
+        });
+    };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    submit = async() => {
+        this.handleClose();
+        const response = await Api.post('card', this.state.card);
+        this.reset();
+    };
+
+    handleInputChange = text => event => {
+        this.setState({
+          card: {...this.state.card, [text]: event.target.value}
+        });
+    };
 
     render() {
         return (
@@ -39,6 +69,7 @@ class NewFlashCard extends Component {
                         id="term"
                         label="Termo"
                         fullWidth
+                        onChange={this.handleInputChange('term')}
                     />
                     <TextField
                         margin="dense"
@@ -46,13 +77,14 @@ class NewFlashCard extends Component {
                         label="Definição"
                         multiline
                         fullWidth
+                        onChange={this.handleInputChange('definition')}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={this.submit} color="primary">
                         Criar
                     </Button>
                 </DialogActions>
