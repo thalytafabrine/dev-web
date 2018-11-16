@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import FlashCard from '../FlashCard/FlashCard';
+import FlashCard from '../components/FlashCard/FlashCard';
 import Grid from '@material-ui/core/Grid';
-import NewFlashCard from '../FlashCard/NewFlashCard';
+import NewFlashCard from '../components/FlashCard/NewFlashCard';
+import { Api } from '../services/Api';
 
-class StudyList extends Component {
+class StudyListPage extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            name: 'List1',
+            name: '',
             cards: [
                 {
                     term: 'term1',
@@ -29,10 +31,21 @@ class StudyList extends Component {
         }
     }
 
+    componentWillMount = async() => {
+        await this.refresh();
+    }
+
+    refresh = async() => {
+        let response = await Api.get('card');
+        console.log(response);
+        this.setState({ posts: response.data });
+    }
+
     render() {
         const {cards} = this.state;
         return (
             <div className="root">
+                {this.refresh}
                 <Grid container spacing={24} style={{padding: 24}}>
                     {cards.map(card => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>
@@ -46,4 +59,4 @@ class StudyList extends Component {
     }
 }
 
-export default StudyList;
+export default StudyListPage;

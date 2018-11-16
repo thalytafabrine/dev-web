@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import SubjectsList from './components/Subject/SubjectsList';
-import StudyList from './components/StudyList/StudyList';
+import StudyListPage from './pages/StudyListPage'
 import NewStudyList from './components/StudyList/NewStudyList';
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <SubjectsList/>
-        <StudyList />
+        <StudyListPage />
         <NewStudyList />
       </div>
     );
