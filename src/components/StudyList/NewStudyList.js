@@ -6,50 +6,33 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import MenuItem from '@material-ui/core/MenuItem';
-
-const subjects = [
-    {
-        value: 'None',
-        label: 'None',
-    },
-    {
-        value: 'Subj1',
-        label: 'Subj1',
-    },
-    {
-        value: 'Subj2',
-        label: 'Subj2',
-    },
-    {
-        value: 'Subj3',
-        label: 'Subj3',
-    },
-    {
-        value: 'Subj4',
-        label: 'Subj4',
-    },
-    {
-        value: 'Subj5',
-        label: 'Subj5',
-    },
-    {
-        value: 'Subj6',
-        label: 'Subj6',
-    }
-];
+import { Api } from '../../services/Api';
 
 class NewStudyList extends React.Component {
-    state = {
-        name: 'Cat in the Hat',
-        url: '/listaEstudo/cat',
-        currency: 'None',
-        open: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            listaEstudo: {
+                name: '',
+                cards: []
+            },
+            open: false
+        }
+    }
+
+    reset = () => {
+        this.setState({
+            listaEstudo: {
+                name: '',
+                cards: []
+            },
+            open: false
+        });
     };
 
     handleChange = name => event => {
         this.setState({
-            [name]: event.target.value,
+            listaEstudo: {...this.state.listaEstudo, [name]: event.target.value}
         });
     };
   
@@ -61,9 +44,10 @@ class NewStudyList extends React.Component {
         this.setState({ open: false });
     };
 
-    criarLista = () => {
-        // aqui deve chamar função da api para POST em lista de estudo
-        this.setState({ open: false });
+    criarLista = async() => {
+        this.handleClose();
+        await Api.post('listaEstudo', this.state.listaEstudo);
+        this.reset();
     };
 
     render() {
@@ -77,43 +61,27 @@ class NewStudyList extends React.Component {
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-              <DialogTitle id="form-dialog-title">Nova Lista de Estudos</DialogTitle>
-              <DialogContent>
-                  <TextField
-                      required
-                      id="standard-name"
-                      label="Nome"
-                      className="textField"
-                      value={this.state.name}
-                      onChange={this.handleChange('name')}
-                      margin="normal"
-                  />
-                  <TextField
-                      id="standard-select-currency"
-                      select
-                      label="Disciplina"
-                      className="textField"
-                      value={this.state.currency}
-                      onChange={this.handleChange('currency')}
-                      SelectProps={{
-                          MenuProps: {
-                              className: "menu",
-                          },
-                      }}
-                      margin="normal"
-                  >
-                      {subjects.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                          </MenuItem>
-                      ))}
-                  </TextField>
+                <DialogTitle id="form-dialog-title">Nova Lista de Estudos</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        required
+                        id="standard-name"
+                        label="Nome"
+                        className="textField"
+                        value={this.state.name}
+                        onChange={this.handleChange('name')}
+                        margin="normal"
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={this.criarLista} color="primary" href={this.state.url}>
+                    <Button 
+                        onClick={this.criarLista} 
+                        color="primary" 
+                        // href={`listaEstudo/${this.state.listaEstudo._id}`}
+                    >
                         Criar
                     </Button>
                 </DialogActions>
