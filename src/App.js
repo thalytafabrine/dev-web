@@ -3,7 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import SubjectsList from './components/Subject/SubjectsList';
 import StudyListPage from './pages/StudyListPage'
-import NewStudyList from './components/StudyList/NewStudyList';
+import SubjectPage from './pages/SubjectPage';
 
 class App extends Component {
   render() {
@@ -11,8 +11,8 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <SubjectsList/>
+        <SubjectPage />
         <StudyListPage />
-        <NewStudyList />
       </div>
     );
   }
