@@ -1,32 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import './FlashCard.css';
+import { Api } from '../../services/Api';
 
-const FlashCard = (props) => {
-  return (
-    <Card>
-      <CardContent className="cardContent">
-        <Typography variant="h4" component="h2">
-          {props.card.term}
-        </Typography>
-        <Typography component="p">
-          {props.card.definition}
-        </Typography>
-      </CardContent>
-      <CardActions>
-          <Button size="small" color="primary">Learn More</Button>
-          <IconButton aria-label="Delete">
-              <DeleteIcon />
-          </IconButton>
-      </CardActions>
-    </Card>
-  );
+class FlashCard extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    delete = async() => {
+        await Api.delete(`card/${this.props.card._id}`);
+        if (this.props.deleteCard) {
+          await this.props.deleteCard(this.props.card);
+        }
+    }
+
+    render() {
+        return (
+            <Card>
+                <CardContent className="cardContent">
+                    <Typography variant="h4" component="h2">
+                        {this.props.card.term}
+                    </Typography>
+                    <Typography component="p">
+                        {this.props.card.definition}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <IconButton onClick={this.delete} aria-label="Delete">
+                        <DeleteIcon/>
+                    </IconButton>
+                </CardActions>
+            </Card>
+        );
+    }
 }
 
 export default FlashCard;

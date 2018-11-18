@@ -10,24 +10,7 @@ class StudyListPage extends Component {
 
         this.state = {
             name: '',
-            cards: [
-                {
-                    term: 'term1',
-                    definition: 'definition1'
-                },
-                {
-                    term: 'term2',
-                    definition: 'definition2'
-                },
-                {
-                    term: 'term3',
-                    definition: 'definition3'
-                },
-                {
-                    term: 'term4',
-                    definition: 'definition4'
-                },
-            ]
+            cards: []
         }
     }
 
@@ -44,15 +27,14 @@ class StudyListPage extends Component {
         const {cards} = this.state;
         return (
             <div className="root">
-                {this.refresh}
                 <Grid container spacing={24} style={{padding: 24}}>
                     {cards.map(card => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>
-                            <FlashCard card={card}/>
+                            <FlashCard card={card} deleteCard={this.refresh}/>
                         </Grid>
                     ))}
                 </Grid>
-                <NewFlashCard />
+                <NewFlashCard newCard={this.refresh}/>
             </div>
         );
     }
