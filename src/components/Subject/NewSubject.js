@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
@@ -8,13 +8,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Api } from '../../services/Api';
 
-class NewStudyList extends React.Component {
+class NewSubject extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            studyList: {
+            subject: {
                 name: '',
-                cards: []
+                teacher: '',
+                studyLists: []
             },
             open: false
         }
@@ -22,9 +23,10 @@ class NewStudyList extends React.Component {
 
     reset = () => {
         this.setState({
-            studyList: {
+            subject: {
                 name: '',
-                cards: []
+                teacher: '',
+                studyLists: []
             },
             open: false
         });
@@ -32,7 +34,7 @@ class NewStudyList extends React.Component {
 
     handleChange = name => event => {
         this.setState({
-            studyList: {...this.state.studyList, [name]: event.target.value}
+            subject: {...this.state.subject, [name]: event.target.value}
         });
     };
   
@@ -44,9 +46,9 @@ class NewStudyList extends React.Component {
         this.setState({ open: false });
     };
 
-    createList = async() => {
+    createSubject = async() => {
         this.handleClose();
-        await Api.post('listaEstudo', this.state.studyList);
+        await Api.post('disciplina', this.state.subject);
         this.reset();
     };
 
@@ -61,15 +63,26 @@ class NewStudyList extends React.Component {
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Nova Lista de Estudos</DialogTitle>
+                <DialogTitle id="form-dialog-title">Nova Disciplina</DialogTitle>
                 <DialogContent>
                     <TextField
                         required
-                        id="standard-name"
+                        id="subject-name"
                         label="Nome"
                         className="textField"
                         value={this.state.name}
                         onChange={this.handleChange('name')}
+                        margin="normal"
+                    />
+                </DialogContent>
+                <DialogContent>
+                    <TextField
+                        required
+                        id="subject-teacher"
+                        label="Professor(a)"
+                        className="textField"
+                        value={this.state.teacher}
+                        onChange={this.handleChange('teacher')}
                         margin="normal"
                     />
                 </DialogContent>
@@ -78,9 +91,9 @@ class NewStudyList extends React.Component {
                         Cancelar
                     </Button>
                     <Button 
-                        onClick={this.createList} 
+                        onClick={this.createSubject} 
                         color="primary" 
-                        href={`listaEstudo/${this.state.studyList._id}`}
+                        href={`disciplina/${this.state.subject._id}`}
                     >
                         Criar
                     </Button>
@@ -91,4 +104,4 @@ class NewStudyList extends React.Component {
     }
 }
 
-export default NewStudyList;
+export default NewSubject;
