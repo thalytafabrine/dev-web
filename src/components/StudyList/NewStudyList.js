@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Api } from '../../services/Api';
+import { Link } from 'react-router-dom';
 
 class NewStudyList extends React.Component {
     constructor(props) {
@@ -80,9 +81,10 @@ class NewStudyList extends React.Component {
                     <Button 
                         onClick={this.createList} 
                         color="primary" 
-                        href={`listaEstudo/${this.state.studyList._id}`}
                     >
-                        Criar
+                        <Link to={`listaEstudo/${this.state.studyList._id}`}>
+                            Criar
+                        </Link>
                     </Button>
                 </DialogActions>
             </Dialog>

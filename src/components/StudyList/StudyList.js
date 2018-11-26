@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import { Api } from '../../services/Api';
+import { Link } from 'react-router-dom';
 
 class StudyList extends Component {
     constructor(props) {
@@ -40,8 +41,10 @@ class StudyList extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" color="primary" href={`listaEstudo/${this.props.studyList._id}`} target="_blank">
-                            Go To Study List
+                        <Button size="small" color="primary" target="_blank">
+                            <Link to={`listaEstudo/${this.props.studyList._id}`} replace>
+                                Go To Study List
+                            </Link>
                         </Button>
                         <IconButton onClick={this.delete} aria-label="Delete">
                             <DeleteIcon/>

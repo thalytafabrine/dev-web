@@ -3,6 +3,7 @@ import FlashCard from '../components/FlashCard/FlashCard';
 import Grid from '@material-ui/core/Grid';
 import NewFlashCard from '../components/FlashCard/NewFlashCard';
 import { Api } from '../services/Api';
+import NavBar from '../components/NavBar/NavBar';
 
 class StudyListPage extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class StudyListPage extends Component {
         const {cards} = this.state;
         return (
             <div className="root">
+                <NavBar />
                 <Grid container spacing={24} style={{padding: 24}}>
                     {cards.map(card => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>

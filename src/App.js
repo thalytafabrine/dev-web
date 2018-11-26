@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/NavBar/NavBar';
-import SubjectsList from './components/Subject/SubjectsList';
-import StudyListPage from './pages/StudyListPage'
-import SubjectPage from './pages/SubjectPage';
+import Router from './routes/Router';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavBar />
-        <SubjectsList/>
-        <SubjectPage />
-        <StudyListPage />
+      <BrowserRouter>
+          <Router />
+      </BrowserRouter>
       </div>
     );
   }
