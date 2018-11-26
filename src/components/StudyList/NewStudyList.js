@@ -82,9 +82,7 @@ class NewStudyList extends React.Component {
                         onClick={this.createList} 
                         color="primary" 
                     >
-                        <Link to={`listaEstudo/${this.state.studyList._id}`}>
-                            Criar
-                        </Link>
+                    Criar
                     </Button>
                 </DialogActions>
             </Dialog>
