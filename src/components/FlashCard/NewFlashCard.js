@@ -56,7 +56,7 @@ class NewFlashCard extends Component {
     render() {
         return (
         <div>
-            <Button variant="fab" color="primary" aria-label="Add" onClick={this.handleClickOpen}>
+            <Button variant="fab" color="primary" aria-label="Add" style={{position: "fixed", right: "2em", bottom: "2em"}} onClick={this.handleClickOpen}>
                 <AddIcon />
             </Button>
             <Dialog

@@ -48,13 +48,16 @@ class NewStudyList extends React.Component {
     createList = async() => {
         this.handleClose();
         await Api.post('listaEstudo', this.state.studyList);
+        if (this.props.newStudyList) {
+            await this.props.newStudyList(this.state.studyList);
+        }
         this.reset();
     };
 
     render() {
         return (
         <div>
-            <Button variant="fab" color="primary" aria-label="Add" onClick={this.handleClickOpen}>
+            <Button variant="fab" color="primary" aria-label="Add" style={{position: "fixed", right: "2em", bottom: "2em"}} onClick={this.handleClickOpen}>
                 <AddIcon />
             </Button>
             <Dialog
