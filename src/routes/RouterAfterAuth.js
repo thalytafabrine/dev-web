@@ -7,7 +7,9 @@ import StudyListPage from '../pages/StudyListPage';
 const RouterAfterAuth = () =>
   <Switch>
     <Route exact path="/" component={HomePage}/>
+    <Route path="/disciplina" component={HomePage}/>
     <Route path="/disciplina/**" component={SubjectPage}/>
+    <Route path="/listaEstudo" component={SubjectPage}/>
     <Route path="/listaEstudo/**" component={StudyListPage}/>
   </Switch>
 

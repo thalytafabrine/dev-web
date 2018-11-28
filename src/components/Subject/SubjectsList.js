@@ -31,7 +31,7 @@ class SubjectsList extends Component {
         const searchSubject = this.state.searchSubject;
         const allSubjects = this.state.subjects;
         let subjectsFind;
-         if (searchSubject === '') {
+        if (searchSubject === '') {
             subjectsFind = allSubjects.map(currentSubject => (
                 <Grid item xs={12} sm={6} lg={4} xl={3}>
                     <Subject subject={currentSubject} />

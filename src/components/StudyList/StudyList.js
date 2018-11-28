@@ -22,7 +22,7 @@ class StudyList extends Component {
     }
 
     getUrl = () => {
-        window.location.href = `http://localhost:3000/listaEstudo/${this.props.studyList._id}`
+        window.location.href = `http://localhost:3000/listaEstudo/${this.props.studyList._id}`;
     }
 
     render() {
