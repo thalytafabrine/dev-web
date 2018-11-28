@@ -21,7 +21,17 @@ class NavBar extends Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null });
-      };    
+    };
+
+    goToSubjects = () => {
+        window.location.href = `http://localhost:3000/disciplina/`;
+        this.handleClose();
+    }
+
+    goToStudyLists = () => {
+        window.location.href = `http://localhost:3000/listaEstudo/`;
+        this.handleClose();
+    }
 
     render() {
         const { anchorEl } = this.state;
@@ -39,8 +49,8 @@ class NavBar extends Component {
                         open={Boolean(anchorEl)}
                         onClose={this.handleClose}
                     >
-                        <MenuItem onClick={this.handleClose}>Disciplinas</MenuItem>
-                        <MenuItem onClick={this.handleClose}>Listas de estudo</MenuItem>
+                        <MenuItem onClick={this.goToSubjects}>Disciplinas</MenuItem>
+                        <MenuItem onClick={this.goToStudyLists}>Listas de estudo</MenuItem>
                         <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                     </Menu>
                     <Typography variant="title" color="inherit">
