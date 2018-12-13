@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import SubjectIcon from '@material-ui/icons/Subject';
@@ -87,20 +85,9 @@ class NavBar extends Component {
             </Drawer>
             <AppBar position="static">
                 <Toolbar>
-                    {/* onClick={this.toggleDrawer('left', true) || this.handleClick */}
                     <IconButton className="menuBottom" color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
                         <MenuIcon />
                     </IconButton>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={this.handleClose}
-                    >
-                        <MenuItem onClick={this.goToSubjects}>Disciplinas</MenuItem>
-                        <MenuItem onClick={this.goToStudyLists}>Listas de estudo</MenuItem>
-                        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-                    </Menu>
                     <Typography variant="title" color="inherit">
                     Memorize
                     </Typography>
