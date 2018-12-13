@@ -10,3 +10,7 @@
 .loginIcon {
     float: right !important;
 }
+
+.list {
+    width: 250
+}
