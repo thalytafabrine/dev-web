@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import SubjectIcon from '@material-ui/icons/Subject';
 import BookIcon from '@material-ui/icons/Book';
 import PersonIcon from '@material-ui/icons/Person';
+import './NavBar.css';
 
 class NavBar extends Component {
     constructor(props) {
@@ -85,9 +86,13 @@ class NavBar extends Component {
             </Drawer>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton className="menuBottom" color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
-                        <MenuIcon />
-                    </IconButton>
+                    {this.props.auth && (
+                    <div>
+                        <IconButton className="menuBottom" color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
+                            <MenuIcon />
+                        </IconButton>
+                    </div>
+                    )}
                     <Typography variant="title" color="inherit">
                     Memorize
                     </Typography>
