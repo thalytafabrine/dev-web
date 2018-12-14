@@ -66,12 +66,12 @@ class SubjectsPage extends Component {
                         <Grid container spacing={24} style={{padding: 24}}>
                             {subjectsFind}
                         </Grid>
-                        <NewSubject newSubject={this.refresh}/>
+                        <NewSubject newSubject={this.refresh} location={this.props.location}/>
                     </div>
                 ) : 
                 (
                     <div>
-                        <NewSubject newSubject={this.refresh}/>
+                        <NewSubject newSubject={this.refresh} location={this.props.location}/>
                     </div>
                 )
                 }

@@ -8,9 +8,9 @@ import StudyListPage from '../pages/StudyListPage';
 const Router = () =>
     <Switch>
         <Route exact path="/disciplina" component={HomePage}/>
-        <Route path="/disciplina/**" component={SubjectPage}/>
+        <Route path="/disciplina/:idDisciplina" component={SubjectPage}/>
         <Route exact path="/listaEstudo" component={SubjectPage}/>
-        <Route path="/listaEstudo/**" component={StudyListPage}/>
+        <Route path="/listaEstudo/:idListaEstudo" component={StudyListPage}/>
         <Route exact path="/" component={LoginPage}/>
     </Switch>
 

@@ -37,7 +37,7 @@ class SubjectPage extends Component {
                         </Grid>
                     ))}
                 </Grid>
-                <NewStudyList newStudyList={this.refresh}/>
+                <NewStudyList newStudyList={this.refresh} location={this.props.location}/>
             </div>
         );
     }

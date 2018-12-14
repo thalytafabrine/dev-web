@@ -40,7 +40,7 @@ class NewFlashCard extends Component {
 
     submit = async() => {
         this.handleClose();
-        await Api.post('card', this.state.card);
+        await Api.post(`${this.props.location.pathname}/card`, this.state.card);
         if (this.props.newCard) {
             await this.props.newCard(this.state.card);
         }

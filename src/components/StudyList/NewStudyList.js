@@ -47,7 +47,7 @@ class NewStudyList extends React.Component {
 
     createList = async() => {
         this.handleClose();
-        await Api.post('listaEstudo', this.state.studyList);
+        await Api.post(`${this.props.location.pathname}/listaEstudo`, this.state.studyList);
         if (this.props.newStudyList) {
             await this.props.newStudyList(this.state.studyList);
         }
