@@ -69,7 +69,6 @@ class NewSubject extends Component {
                         required
                         id="subject-name"
                         label="Nome"
-                        className="textField"
                         value={this.state.name}
                         onChange={this.handleChange('name')}
                         margin="normal"
@@ -80,7 +79,6 @@ class NewSubject extends Component {
                         required
                         id="subject-teacher"
                         label="Professor(a)"
-                        className="textField"
                         value={this.state.teacher}
                         onChange={this.handleChange('teacher')}
                         margin="normal"

@@ -28,7 +28,7 @@ class StudyListPage extends Component {
         const {cards} = this.state;
         return (
             <div className="root">
-                <NavBar />
+                <NavBar auth={true}/>
                 <Grid container spacing={24} style={{padding: 24}}>
                     {cards.map(card => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>
