@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -49,6 +50,12 @@ class NavBar extends Component {
         });
     }
 
+    logout = () => {
+        firebase.auth().signOut();
+        window.location.href=`http://localhost:3000/`;
+        this.handleClose();
+    }
+
     render() {
         const { anchorEl } = this.state;
 
@@ -63,7 +70,7 @@ class NavBar extends Component {
                         <ListItemIcon><SubjectIcon /></ListItemIcon>
                         <ListItemText primary={"Listas de Estudo"} />
                     </ListItem>
-                    <ListItem button key={"Logout"}>
+                    <ListItem button key={"Logout"} onClick={this.logout}>
                         <ListItemIcon><PersonIcon /></ListItemIcon>
                         <ListItemText primary={"Logout"} />
                     </ListItem>
