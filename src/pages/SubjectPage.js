@@ -29,7 +29,7 @@ class SubjectPage extends Component {
         const {studyLists} = this.state;
         return (
             <div className="root">
-                <NavBar />
+                <NavBar auth={true} />
                 <Grid container spacing={24} style={{padding: 24}}>
                     {studyLists.map(studyList => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>
