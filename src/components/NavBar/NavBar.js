@@ -20,28 +20,16 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            anchorEl: null,
             left: false
         }
     }
-    
-
-    handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
 
     goToSubjects = () => {
         window.location.href = `http://localhost:3000/disciplina/`;
-        this.handleClose();
     }
 
     goToStudyLists = () => {
         window.location.href = `http://localhost:3000/listaEstudo/`;
-        this.handleClose();
     }
 
     toggleDrawer = (side, open) => () => {
@@ -53,7 +41,6 @@ class NavBar extends Component {
     logout = () => {
         firebase.auth().signOut();
         window.location.href=`http://localhost:3000/`;
-        this.handleClose();
     }
 
     render() {
