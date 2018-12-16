@@ -44,7 +44,6 @@ class NavBar extends Component {
     }
 
     render() {
-        const { anchorEl } = this.state;
 
         const sideList = (
             <div className="list">
