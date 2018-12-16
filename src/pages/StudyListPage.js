@@ -11,17 +11,44 @@ class StudyListPage extends Component {
 
         this.state = {
             name: '',
-            cards: []
+            cards: [],
+            idsCards : [],
+            location: ''
         }
     }
 
-    componentWillMount = async() => {
-        await this.refresh();
+    componentWillMount = () => {
+        this.refresh();
     }
 
-    refresh = async() => {
-        let response = await Api.get('card');
-        this.setState({ cards: response.data });
+    refresh = () => {
+        this.reset();
+        let separateURL = (this.props.match.url).split('/');
+        let url = separateURL[3].concat('/').concat(separateURL[4]);
+        this.setState({location : url})
+        Api.get(`${url}/card`).then(response => {
+            let ids = response.data;
+            this.setState({idsCards: ids});
+            this.renderCards();
+        });
+    }
+
+    reset = () => {
+        this.setState({
+            name: '',
+            cards: [],
+            idsCards: []
+        });
+    }
+
+    renderCards = () => {
+        this.state.idsCards && this.state.idsCards.forEach(id => {
+            Api.get(`card/${id}`).then(response => {
+                if (response.data !== null) {
+                    this.setState({cards: this.state.cards.concat(response.data)});
+                }
+            });
+        });
     }
 
     render() {
@@ -36,7 +63,7 @@ class StudyListPage extends Component {
                         </Grid>
                     ))}
                 </Grid>
-                <NewFlashCard newCard={this.refresh}/>
+                <NewFlashCard newCard={this.refresh} location={this.state.location}/>
             </div>
         );
     }
