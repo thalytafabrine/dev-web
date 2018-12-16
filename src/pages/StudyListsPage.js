@@ -5,16 +5,12 @@ import NewStudyList from '../components/StudyList/NewStudyList';
 import StudyList from '../components/StudyList/StudyList';
 import NavBar from '../components/NavBar/NavBar';
 
-class SubjectPage extends Component {
+class StudyListsPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: '',
-            teacher: '',
-            studyLists: [],
-            idsStudyLists: [],
-            loaded: false
+            studyLists: []
         }
         this.refresh = this.refresh.bind(this);
         this.reset = this.reset.bind(this);
@@ -26,31 +22,14 @@ class SubjectPage extends Component {
 
     refresh = () => {
         this.reset();
-        let url = this.props.match.url;
-        Api.get(`${url}/listaEstudo`).then(response => {
-            let ids = response.data;
-            this.setState({idsStudyLists: ids});
-            this.renderStudyLists();
+        Api.get(`/listaEstudo`).then(response => {
+            this.setState({ studyLists: response.data });
         });
     }
 
     reset = () => {
         this.setState({
-            name: '',
-            teacher: '',
-            studyLists: [],
-            idsStudyLists: [],
-            loaded: false
-        });
-    }
-
-    renderStudyLists = () => {
-        this.state.idsStudyLists && this.state.idsStudyLists.forEach(id => {
-            Api.get(`listaEstudo/${id}`).then(response => {
-                if (response.data !== null) {
-                    this.setState({studyLists: this.state.studyLists.concat(response.data)});
-                }
-            });
+            studyLists: []
         });
     }
 
@@ -72,4 +51,4 @@ class SubjectPage extends Component {
     }
 }
 
-export default SubjectPage;
+export default StudyListsPage;

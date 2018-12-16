@@ -46,9 +46,6 @@ class Subject extends Component {
                             <Typography variant="subtitle1">
                                 Professor(a): {this.props.subject.teacher}
                             </Typography>
-                            <Typography variant="subtitle2">
-                                {this.state.studyListsLength} listas de estudo nesta disciplina.
-                            </Typography>
                         </CardContent>
                         <CardActions>
                         <Button size="small" color="primary" onClick={this.getUrl}>

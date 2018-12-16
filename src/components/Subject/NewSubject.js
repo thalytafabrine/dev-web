@@ -49,7 +49,7 @@ class NewSubject extends Component {
     createSubject = async() => {
         this.handleClose();
         await Api.post('disciplina', this.state.subject);
-        this.reset();
+        window.location.href = `http://localhost:3000/disciplina/${this.state.subject._id}`;
     };
 
     render() {
@@ -90,8 +90,7 @@ class NewSubject extends Component {
                     </Button>
                     <Button 
                         onClick={this.createSubject} 
-                        color="primary" 
-                        href={`disciplina/${this.state.subject._id}`}
+                        color="primary"
                     >
                         Criar
                     </Button>
