@@ -52,10 +52,12 @@ class NavBar extends Component {
                         <ListItemIcon><BookIcon /></ListItemIcon>
                         <ListItemText primary={"Disciplinas"} />
                     </ListItem>
+                    <Divider inset/>
                     <ListItem button key={"Listas de Estudo"} onClick={this.goToStudyLists}>
                         <ListItemIcon><SubjectIcon /></ListItemIcon>
                         <ListItemText primary={"Listas de Estudo"} />
                     </ListItem>
+                    <Divider inset />
                     <ListItem button key={"Logout"} onClick={this.logout}>
                         <ListItemIcon><PersonIcon /></ListItemIcon>
                         <ListItemText primary={"Logout"} />
@@ -76,6 +78,9 @@ class NavBar extends Component {
             >
                 {sideList}
             </div>
+            <Typography variant="overline" className="footer" style={{fontSize: 8.75}}>
+                Desenvolvido por <a href="https://github.com/thalytafabrine">Thalyta Fabrine</a> 
+            </Typography>
             </Drawer>
             <AppBar position="static">
                 <Toolbar>

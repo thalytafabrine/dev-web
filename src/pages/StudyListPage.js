@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import NewFlashCard from '../components/FlashCard/NewFlashCard';
 import { Api } from '../services/Api';
 import NavBar from '../components/NavBar/NavBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class StudyListPage extends Component {
     constructor(props) {
@@ -13,8 +14,13 @@ class StudyListPage extends Component {
             name: '',
             cards: [],
             idsCards : [],
-            location: ''
+            location: '',
+            loaded: false
         }
+
+        this.refresh = this.refresh.bind(this);
+        this.reset = this.reset.bind(this);
+        this.renderCards = this.renderCards.bind(this);
     }
 
     componentWillMount = () => {
@@ -25,10 +31,13 @@ class StudyListPage extends Component {
         this.reset();
         let separateURL = (this.props.match.url).split('/');
         let url = separateURL[3].concat('/').concat(separateURL[4]);
-        this.setState({location : url})
-        Api.get(`${url}/card`).then(response => {
-            let ids = response.data;
-            this.setState({idsCards: ids});
+        Api.get(`${url}`).then(response => {
+            let list = response.data;
+            this.setState({
+                name: list.name, 
+                idsCards: list.cards, 
+                location : url
+            });
             this.renderCards();
         });
     }
@@ -37,7 +46,8 @@ class StudyListPage extends Component {
         this.setState({
             name: '',
             cards: [],
-            idsCards: []
+            idsCards: [],
+            loaded: false
         });
     }
 
@@ -46,6 +56,7 @@ class StudyListPage extends Component {
             Api.get(`card/${id}`).then(response => {
                 if (response.data !== null) {
                     this.setState({cards: this.state.cards.concat(response.data)});
+                    this.setState({loaded: true});
                 }
             });
         });
@@ -56,13 +67,17 @@ class StudyListPage extends Component {
         return (
             <div className="root">
                 <NavBar auth={true}/>
-                <Grid container spacing={24} style={{padding: 24}}>
+                {this.state.loaded ? (
+                    <Grid container spacing={16} style={{padding: 24}}>
                     {cards.map(card => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>
                             <FlashCard card={card} deleteCard={this.refresh}/>
                         </Grid>
                     ))}
-                </Grid>
+                    </Grid>
+                ) : (
+                    <CircularProgress />
+                )}
                 <NewFlashCard newCard={this.refresh} location={this.state.location}/>
             </div>
         );

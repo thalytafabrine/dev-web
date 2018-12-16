@@ -14,3 +14,10 @@
 .list {
     width: 250
 }
+
+.footer {
+    vertical-align: baseline;
+    position: absolute;
+    bottom: 2px;
+    padding-left: 18px;
+}

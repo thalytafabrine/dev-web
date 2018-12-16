@@ -24,10 +24,10 @@ class FlashCard extends Component {
         return (
             <Card>
                 <CardContent className="cardContent">
-                    <Typography variant="h4" component="h2">
+                    <Typography variant="display1" component="h2">
                         {this.props.card.term}
                     </Typography>
-                    <Typography component="p">
+                    <Typography variant="subtitle1">
                         {this.props.card.definition}
                     </Typography>
                 </CardContent>

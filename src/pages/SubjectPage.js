@@ -4,6 +4,7 @@ import { Api } from '../services/Api';
 import NewStudyList from '../components/StudyList/NewStudyList';
 import StudyList from '../components/StudyList/StudyList';
 import NavBar from '../components/NavBar/NavBar';
+import { CircularProgress } from '@material-ui/core';
 
 class SubjectPage extends Component {
     constructor(props) {
@@ -13,11 +14,12 @@ class SubjectPage extends Component {
             name: '',
             teacher: '',
             studyLists: [],
-            idsStudyLists: [],
-            loaded: false
+            idsStudyLists: []
         }
+
         this.refresh = this.refresh.bind(this);
         this.reset = this.reset.bind(this);
+        this.renderStudyLists = this.renderStudyLists.bind(this)
     }
 
     componentWillMount = () => {
@@ -27,9 +29,13 @@ class SubjectPage extends Component {
     refresh = () => {
         this.reset();
         let url = this.props.match.url;
-        Api.get(`${url}/listaEstudo`).then(response => {
-            let ids = response.data;
-            this.setState({idsStudyLists: ids});
+        Api.get(`${url}`).then(response => {
+            let subject = response.data;
+            this.setState({
+                name: subject.name, 
+                teacher: subject.teacher, 
+                idsStudyLists: subject.studyLists
+            });
             this.renderStudyLists();
         });
     }
@@ -39,8 +45,7 @@ class SubjectPage extends Component {
             name: '',
             teacher: '',
             studyLists: [],
-            idsStudyLists: [],
-            loaded: false
+            idsStudyLists: []
         });
     }
 
@@ -59,13 +64,17 @@ class SubjectPage extends Component {
         return (
             <div className="root">
                 <NavBar auth={true} />
-                <Grid container spacing={24} style={{padding: 24}}>
-                    {studyLists.map(studyList => (
-                        <Grid item xs={12} sm={6} lg={4} xl={3}>
-                            <StudyList studyList={studyList} deleteStudyList={this.refresh} url={this.props.match.url}/>
-                        </Grid>
-                    ))}
-                </Grid>
+                {this.loaded ? (
+                    <Grid container spacing={24} style={{padding: 24}}>
+                        {studyLists.map(studyList => (
+                            <Grid item xs={12} sm={6} lg={4} xl={3}>
+                                <StudyList studyList={studyList} deleteStudyList={this.refresh} url={this.props.match.url}/>
+                            </Grid>
+                        ))}
+                    </Grid>
+                ) : (
+                    <CircularProgress />
+                )}
                 <NewStudyList newStudyList={this.refresh} location={this.props.location}/>
             </div>
         );

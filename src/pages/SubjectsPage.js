@@ -58,7 +58,7 @@ class SubjectsPage extends Component {
                     <div>
                         <TextField style={{padding: 24}}
                             id="searchInput"
-                            placeholder="Search for subjects"   
+                            placeholder="Buscar disciplina"   
                             margin="normal"
                             type="search"
                             onChange={this.handleChange('searchSubject')}
