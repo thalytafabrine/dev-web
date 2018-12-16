@@ -9,9 +9,6 @@ import './FlashCard.css';
 import { Api } from '../../services/Api';
 
 class FlashCard extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     delete = async() => {
         await Api.delete(`card/${this.props.card._id}`);

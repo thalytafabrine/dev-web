@@ -4,7 +4,7 @@ import { Api } from '../services/Api';
 import NewStudyList from '../components/StudyList/NewStudyList';
 import StudyList from '../components/StudyList/StudyList';
 import NavBar from '../components/NavBar/NavBar';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 
 class SubjectPage extends Component {
     constructor(props) {
@@ -14,7 +14,8 @@ class SubjectPage extends Component {
             name: '',
             teacher: '',
             studyLists: [],
-            idsStudyLists: []
+            idsStudyLists: [],
+            loaded : false
         }
 
         this.refresh = this.refresh.bind(this);
@@ -45,7 +46,8 @@ class SubjectPage extends Component {
             name: '',
             teacher: '',
             studyLists: [],
-            idsStudyLists: []
+            idsStudyLists: [],
+            loaded: false
         });
     }
 
@@ -57,6 +59,7 @@ class SubjectPage extends Component {
                 }
             });
         });
+        this.setState({loaded: true});
     }
 
     render() {
@@ -64,7 +67,11 @@ class SubjectPage extends Component {
         return (
             <div className="root">
                 <NavBar auth={true} />
-                {this.loaded ? (
+                <br />
+                <Typography variant="display2">
+                    {this.state.name}
+                </Typography>
+                {this.state.loaded ? (
                     <Grid container spacing={24} style={{padding: 24}}>
                         {studyLists.map(studyList => (
                             <Grid item xs={12} sm={6} lg={4} xl={3}>

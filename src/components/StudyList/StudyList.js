@@ -10,9 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import { Api } from '../../services/Api';
 
 class StudyList extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     delete = async() => {
         await Api.delete(`listaEstudo/${this.props.studyList._id}`);
@@ -39,13 +36,10 @@ class StudyList extends Component {
                         <Typography gutterBottom variant="h4" component="h2">
                             {this.props.studyList.name}
                         </Typography>
-                        <Typography component="p">
-                            {this.props.studyList.teacher}
-                        </Typography>
                     </CardContent>
                     <CardActions>
                         <Button size="small" color="primary" target="_blank" onClick={this.getUrl}>
-                            Go To Study List
+                            Ir para lista de estudo
                         </Button>
                         <IconButton onClick={this.delete} aria-label="Delete">
                             <DeleteIcon/>

@@ -5,6 +5,7 @@ import NewFlashCard from '../components/FlashCard/NewFlashCard';
 import { Api } from '../services/Api';
 import NavBar from '../components/NavBar/NavBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography } from '@material-ui/core';
 
 class StudyListPage extends Component {
     constructor(props) {
@@ -56,10 +57,10 @@ class StudyListPage extends Component {
             Api.get(`card/${id}`).then(response => {
                 if (response.data !== null) {
                     this.setState({cards: this.state.cards.concat(response.data)});
-                    this.setState({loaded: true});
                 }
             });
         });
+        this.setState({loaded: true});
     }
 
     render() {
@@ -67,6 +68,9 @@ class StudyListPage extends Component {
         return (
             <div className="root">
                 <NavBar auth={true}/>
+                <Typography variant="display2">
+                    {this.state.name}
+                </Typography>
                 {this.state.loaded ? (
                     <Grid container spacing={16} style={{padding: 24}}>
                     {cards.map(card => (
