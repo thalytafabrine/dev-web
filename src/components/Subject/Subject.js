@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Api } from '../../services/Api';
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
@@ -9,10 +10,23 @@ import Typography from '@material-ui/core/Typography'
 class Subject extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            studyListsLength : 0
+        }
     }
 
     getUrl = () => {
         window.location.href = `http://localhost:3000/disciplina/${this.props.subject._id}`;
+    }
+
+    componentWillMount = async() => {
+        await this.refresh();
+    }
+
+    refresh = async() => {
+        let response = await Api.get(`disciplina/${this.props.subject._id}`);
+        let studyListsLength = (response.data.studyLists).length;
+        this.setState({ studyListsLength: studyListsLength });
     }
 
     render () {
@@ -26,16 +40,19 @@ class Subject extends Component {
                             title={this.props.subject.name}
                         />
                         <CardContent>
-                        <Typography gutterBottom variant="h4" component="h2">
-                            {this.props.subject.name}
-                        </Typography>
-                        <Typography component="p">
-                            {this.props.subject.teacher}
-                        </Typography>
+                            <Typography gutterBottom variant="h4" component="h2">
+                                {this.props.subject.name}
+                            </Typography>
+                            <Typography variant="subtitle1">
+                                Professor(a): {this.props.subject.teacher}
+                            </Typography>
+                            <Typography variant="subtitle2">
+                                {this.state.studyListsLength} listas de estudo nesta disciplina.
+                            </Typography>
                         </CardContent>
                         <CardActions>
-                        <Button size="small" color="primary" onClick={this.getUrl} target="_blank">
-                            Go To Subject
+                        <Button size="small" color="primary" onClick={this.getUrl}>
+                            Ver disciplina
                         </Button>
                         </CardActions>
                     </Card>

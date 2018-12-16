@@ -12,17 +12,46 @@ class SubjectPage extends Component {
         this.state = {
             name: '',
             teacher: '',
-            studyLists: []
+            studyLists: [],
+            idsStudyLists: [],
+            loaded: false
         }
+        this.refresh = this.refresh.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
-    componentWillMount = async() => {
-        await this.refresh();
+    componentWillMount = () => {
+        this.refresh();
     }
 
-    refresh = async() => {
-        let response = await Api.get('listaEstudo');
-        this.setState({ studyLists: response.data });
+    refresh = () => {
+        this.reset();
+        let url = this.props.match.url;
+        Api.get(`${url}/listaEstudo`).then(response => {
+            let ids = response.data;
+            this.setState({idsStudyLists: ids});
+            this.renderStudyLists();
+        });
+    }
+
+    reset = () => {
+        this.setState({
+            name: '',
+            teacher: '',
+            studyLists: [],
+            idsStudyLists: [],
+            loaded: false
+        });
+    }
+
+    renderStudyLists = () => {
+        this.state.idsStudyLists.forEach(id => {
+            Api.get(`listaEstudo/${id}`).then(response => {
+                if (response.data !== null) {
+                    this.setState({studyLists: this.state.studyLists.concat(response.data)});
+                }
+            });
+        });
     }
 
     render() {
@@ -33,7 +62,7 @@ class SubjectPage extends Component {
                 <Grid container spacing={24} style={{padding: 24}}>
                     {studyLists.map(studyList => (
                         <Grid item xs={12} sm={6} lg={4} xl={3}>
-                            <StudyList studyList={studyList} deleteStudyList={this.refresh}/>
+                            <StudyList studyList={studyList} deleteStudyList={this.refresh} url={this.props.match.url}/>
                         </Grid>
                     ))}
                 </Grid>
